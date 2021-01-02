@@ -1,16 +1,20 @@
-# Make file for shell v2 project at Holberton school
-# List variables
-# SHELL = /bin/bash
-# CC = gcc
-# CFLAGS = -Wall -Werror -Wextra -pedantic
-# NAME = hsh
-#
-# # Main directive
-# all: $(NAME)
-#
-# # Compile executable from object files
-# $(NAME): $(OBJ) $(HEADERS)
-# 	$(CC) -o $@ $^ $(CFLAGS)
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -pedantic
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+NAME = hsh
 
-all:
-	gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+.PHONY: all clean oclean flcean re
+
+all: header.h $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+clean:
+	$(RM) *~ $(NAME)
+
+oclean:
+	$(RM) $(OBJ)
+
+fclean: clean oclean
+
+re: oclean all
