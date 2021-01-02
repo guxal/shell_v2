@@ -33,7 +33,7 @@ int _setenv(env_t *env, char *name, char *value)
 
 	tmp = _getenv(name, env);
 	free(tmp->value);
-	tmp->value = malloc(sizeof(char *) * _strlen(value));
+	tmp->value = malloc(sizeof(char) * _strlen(value) + 1);
 
 	if (tmp->value == NULL)
 		return (0);

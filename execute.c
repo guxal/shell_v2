@@ -56,11 +56,11 @@ int execute(char **argv, path_t *path)
 
 	while (path)
 	{
-		concat = malloc((_strlen(path->str) + 1) * sizeof(char));
+		concat = malloc(_strlen(argv[0]) + (_strlen(path->str) + 2) * sizeof(char));
 		_strcpy(concat, path->str);
 		/* debe cambiar */
-		concat = realloc(concat,
-				sizeof(char) * ((_strlen(path->str) + _strlen(argv[0]) + 1)));
+		/* concat = realloc(concat, */
+		/*	sizeof(char) * ((_strlen(path->str) + _strlen(argv[0]) + 1))); */
 		concat = _strcat(concat, argv[0]);
 		if (stat(concat, &st) == 0)
 		{
