@@ -19,7 +19,7 @@ int main(void)
 		/* print prompt */
 		/* if (isatty(fileno(stdin))) */
 		if (isatty(STDIN_FILENO))
-			write(1, "#hsh$ ", 7);
+			write(1, "($) ", 5);
 		buf = read_line();
 		if (buf == NULL)
 		{
