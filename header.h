@@ -59,7 +59,10 @@ typedef struct args
  * struct node_s - containt node path and length nodes
  * @env: singly linked list of env
  * @path: singly linked list of path
- * @len: length of nodes in singly linked list
+ * @len: length of nodes in singly linked list paths
+ * @namep: name of the program
+ * @cexe: counter executions
+ * @status: status program exit
  *
  * Description: node path and length nodes
  */
@@ -68,6 +71,9 @@ typedef struct node_s
 	env_t *env;
 	path_t *path;
 	size_t len;
+	char *namep;
+	int cexe;
+	int status;
 } node_t;
 
 /**

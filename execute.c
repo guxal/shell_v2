@@ -15,7 +15,8 @@ int launch(char **argv)
 		if (execve(argv[0], argv, NULL) == -1)
 		{
 			perror("Error:");
-		}
+		} else
+			node->status = 0;
 	}
 	else if (pid < 0)
 	{
@@ -27,6 +28,7 @@ int launch(char **argv)
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		/* wait(NULL); */
+		node->status = status;
 	}
 
 	return (1);
@@ -58,22 +60,22 @@ int execute(char **argv, path_t *path)
 	{
 		concat = malloc(_strlen(argv[0]) + (_strlen(path->str) + 2) * sizeof(char));
 		_strcpy(concat, path->str);
-		/* debe cambiar */
-		/* concat = realloc(concat, */
-		/*	sizeof(char) * ((_strlen(path->str) + _strlen(argv[0]) + 1))); */
 		concat = _strcat(concat, argv[0]);
 		if (stat(concat, &st) == 0)
 		{
 			free(argv[0]);
 			argv[0] = malloc((_strlen(concat) + 1) * sizeof(char));
 			argv[0] = _strcpy(argv[0], concat);
-			free(concat);
+			free(concat), node->cexe++;
 			return (launch(argv));
 		}
 		else
 			free(concat);
 		path = path->next;
 	}
-
+	fprintf(stderr, "%s: %d: %s: not found\n", node->namep, node->cexe, argv[0]);
+	fflush(stderr);
+	node->cexe++;
+	node->status = 127;
 	return (1);
 }

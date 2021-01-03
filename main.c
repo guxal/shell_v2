@@ -7,11 +7,10 @@
  * Return: Success or Fail
  */
 
-int main(int argc, char __attribute__((unused)) *argv[])
+int main(int argc, char *argv[])
 {
 	char *buf = NULL;
 	args_t args;
-	node_t *node;
 
 	if (argc != 1)
 	{
@@ -23,9 +22,9 @@ int main(int argc, char __attribute__((unused)) *argv[])
 		printf("Failure installing sighandler\n");
 		return (1);
 	}
-
 	node = build_node();
-
+	node->namep = malloc(sizeof(char) * _strlen(argv[0]) + 1);
+	node->namep = _strcpy(node->namep, argv[0]);
 	while (EOF)
 	{
 		/* print prompt */
@@ -48,5 +47,6 @@ int main(int argc, char __attribute__((unused)) *argv[])
 		}
 	} free_list_p(node->path);
 	free_list_e(node->env);
-	return (0);
+	free(node->namep);
+	return (node->status);
 }
