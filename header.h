@@ -131,4 +131,6 @@ node_t *build_node(void);
 
 int handle_sigaction(void);
 
+void print_error(char *verror, int terror);
+
 #endif

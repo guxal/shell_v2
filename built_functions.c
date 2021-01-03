@@ -14,7 +14,6 @@ int built_cd(char **args)
 	cwd = getcwd(cwd, 0);
 	/* printf("home : %s\n", home->value); */
 	/* printf("old home : %s\n", oldh->value); */
-
 	if (args[1] == NULL)
 	{
 		if (home->value)
@@ -33,7 +32,8 @@ int built_cd(char **args)
 	{
 		if (chdir(args[1]) != 0)
 		{
-			perror("hsh");
+			/* perror("hsh"); */
+			print_error(args[1], 2);
 		}
 	}
 	nwd = getcwd(nwd, 0);
@@ -65,7 +65,7 @@ int built_help(__attribute__((unused)) char **args)
  */
 int built_exit(__attribute__((unused)) char **args)
 {
-	exit(1);
+	_exit(node->status);
 }
 /**
  * built_env - print environ

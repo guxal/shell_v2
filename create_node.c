@@ -27,7 +27,7 @@ node_t *build_node(void)
 	/* printf("path : %s\n", get_env->value); */
 	node->path = head;
 	node->env = env;
-	node->cexe = 1;
+	node->cexe = 0;
 	node->status = 0;
 	/* node = &n; */
 	return (node);

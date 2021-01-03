@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 		/* if (isatty(fileno(stdin))) */
 		if (isatty(STDIN_FILENO))
 			write(1, "($) ", 5);
+		node->cexe++;
 		buf = read_line();
 		if (buf == NULL)
 		{
@@ -46,7 +47,6 @@ int main(int argc, char *argv[])
 			free(buf);
 		}
 	} free_list_p(node->path);
-	free_list_e(node->env);
-	free(node->namep);
+	free_list_e(node->env), free(node->namep);
 	return (node->status);
 }

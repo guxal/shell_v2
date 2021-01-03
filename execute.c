@@ -66,16 +66,13 @@ int execute(char **argv, path_t *path)
 			free(argv[0]);
 			argv[0] = malloc((_strlen(concat) + 1) * sizeof(char));
 			argv[0] = _strcpy(argv[0], concat);
-			free(concat), node->cexe++;
+			free(concat);
 			return (launch(argv));
 		}
 		else
 			free(concat);
 		path = path->next;
 	}
-	fprintf(stderr, "%s: %d: %s: not found\n", node->namep, node->cexe, argv[0]);
-	fflush(stderr);
-	node->cexe++;
-	node->status = 127;
+	print_error(argv[0], 0);
 	return (1);
 }
