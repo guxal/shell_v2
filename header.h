@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 
 /**
  * struct path_s - singly linked list of the path
@@ -121,5 +122,7 @@ env_t *create_node_e(void);
 void free_list_e(env_t *head);
 
 node_t *build_node(void);
+
+int handle_sigaction(void);
 
 #endif

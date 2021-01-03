@@ -2,15 +2,27 @@
 
 /**
  * main - create shell
- *
+ * @argc: arguments number
+ * @argv: array call arg unused
  * Return: Success or Fail
  */
 
-int main(void)
+int main(int argc, char __attribute__((unused)) *argv[])
 {
 	char *buf = NULL;
 	args_t args;
 	node_t *node;
+
+	if (argc != 1)
+	{
+		printf("Usage: hsh\n");
+		exit(1);
+	}
+	if (handle_sigaction() == -1)
+	{
+		printf("Failure installing sighandler\n");
+		return (1);
+	}
 
 	node = build_node();
 
@@ -34,8 +46,7 @@ int main(void)
 			delete_memory(args.argv, args.argc);
 			free(buf);
 		}
-	}
-	free_list_p(node->path);
+	} free_list_p(node->path);
 	free_list_e(node->env);
 	return (0);
 }
