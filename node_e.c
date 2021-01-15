@@ -77,8 +77,10 @@ env_t *create_node_e(void)
 
 	while (ptr[count])
 	{
+		/* printf("environ %s\n", ptr[count]); */
 		token = strtok(ptr[count], delim);
-		tmp = strtok(NULL, delim);
+		tmp = strtok(NULL, "");
+		/* printf("value %s\n", tmp); */
 		add_node_e(&new, token, tmp);
 		count++;
 	}

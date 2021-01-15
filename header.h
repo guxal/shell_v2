@@ -111,7 +111,7 @@ char *_strcat(char *dest, char *src);
 
 /* char *_getenv(const char *name); */
 env_t *_getenv(const char *name, env_t *env);
-int _setenv(env_t *env, char *name, char *value);
+int _setenv(env_t **env, char *name, char *value);
 char *read_line(void);
 
 void free_list_p(path_t *head);
@@ -120,14 +120,16 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 
 args_t split_line(char *buf);
 
-path_t *add_node(path_t **head, char *str);
+path_t *add_node_p(path_t **head, char *str);
 path_t *create_node_p(char *data, char *separator);
 size_t node_len_p(const path_t *h);
 
+env_t *add_node_e(env_t **head, char *key, char *value);
 env_t *create_node_e(void);
 void free_list_e(env_t *head);
 
 node_t *build_node(void);
+void free_node(void);
 
 int handle_sigaction(void);
 

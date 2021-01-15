@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 {
 	char *buf = NULL;
 	args_t args;
+	int status;
 
 	if (argc != 1)
 	{
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
 			write(1, "($) ", 5);
 		node->cexe++;
 		buf = read_line();
+		/* printf("buf: %s\n", buf); */
 		if (buf == NULL)
 		{
 			if (isatty(STDIN_FILENO))
@@ -46,7 +48,8 @@ int main(int argc, char *argv[])
 			delete_memory(args.argv, args.argc);
 			free(buf);
 		}
-	} free_list_p(node->path);
-	free_list_e(node->env), free(node->namep);
-	return (node->status);
+	}
+	status = node->status;
+	free_node();
+	return (status);
 }

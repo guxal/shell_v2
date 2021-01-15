@@ -67,11 +67,16 @@ path_t *create_node_p(char *data, char *separator)
 {
 	path_t *new;
 	char *token;
+	char *tmp;
+
+	tmp = malloc((_strlen(data) + 1) * sizeof(char));
+	tmp = _strcpy(tmp, data);
 
 	new = NULL;
-	token = strtok(data, separator);
+	token = strtok(tmp, separator);
 	while (token)
 		add_node_p(&new, token), token = strtok(NULL, separator);
 
+	free(tmp);
 	return (new);
 }

@@ -12,18 +12,25 @@ int built_cd(char **args)
 	env_t *oldh = _getenv("OLDPWD", node->env);
 
 	cwd = getcwd(cwd, 0);
+	if (oldh == NULL)
+	{
+		_setenv(&node->env, "OLDPWD", cwd);
+		oldh = _getenv("OLDPWD", node->env);
+	}
 	/* printf("home : %s\n", home->value); */
 	/* printf("old home : %s\n", oldh->value); */
 	if (args[1] == NULL)
 	{
-		if (home->value)
-			chdir(home->value);
+		if (home != NULL)
+			if (home->value)
+				chdir(home->value);
 		/* fprintf(stderr, "lsh: expected argument to \"cd\"\n"); */
 	}
 	else if (*args[1] == '-')
 	{
-		if (oldh->value)
-			chdir(oldh->value);
+		if (oldh != NULL)
+			if (oldh->value)
+				chdir(oldh->value);
 		tmp = getcwd(tmp, 0);
 		printf("%s\n", tmp);
 		free(tmp);
@@ -38,8 +45,8 @@ int built_cd(char **args)
 	}
 	nwd = getcwd(nwd, 0);
 	/* set environt */
-	_setenv(node->env, "OLDPWD", cwd);
-	_setenv(node->env, "PWD", nwd);
+	_setenv(&node->env, "OLDPWD", cwd);
+	_setenv(&node->env, "PWD", nwd);
 	/* set environt */
 	free(nwd);
 	free(cwd);
