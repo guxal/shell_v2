@@ -27,11 +27,10 @@ int launch(char **argv)
 		do {
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
-		/* wait(NULL); */
-		node->status = status;
+		wait(&status);
+		node->status =  WEXITSTATUS(status);
 	}
-
-	return (1);
+	return (0);
 }
 /**
  * execute - execute
@@ -74,5 +73,5 @@ int execute(char **argv, path_t *path)
 		path = path->next;
 	}
 	print_error(argv[0], 0);
-	return (1);
+	return (0);
 }

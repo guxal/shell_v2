@@ -29,12 +29,10 @@ int main(int argc, char *argv[])
 	while (EOF)
 	{
 		/* print prompt */
-		/* if (isatty(fileno(stdin))) */
 		if (isatty(STDIN_FILENO))
 			write(1, "($) ", 5);
 		node->cexe++;
 		buf = read_line();
-		/* printf("buf: %s\n", buf); */
 		if (buf == NULL)
 		{
 			if (isatty(STDIN_FILENO))
@@ -48,8 +46,7 @@ int main(int argc, char *argv[])
 			delete_memory(args.argv, args.argc);
 			free(buf);
 		}
-	}
-	status = node->status;
+	} status = node->status;
 	free_node();
 	return (status);
 }

@@ -108,6 +108,7 @@ int execute(char **argv, path_t *path);
 
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
+int _atoi(char *s);
 
 /* char *_getenv(const char *name); */
 env_t *_getenv(const char *name, env_t *env);

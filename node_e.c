@@ -81,7 +81,8 @@ env_t *create_node_e(void)
 		token = strtok(ptr[count], delim);
 		tmp = strtok(NULL, "");
 		/* printf("value %s\n", tmp); */
-		add_node_e(&new, token, tmp);
+		if (tmp != NULL)
+			add_node_e(&new, token, tmp);
 		count++;
 	}
 	return (new);

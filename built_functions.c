@@ -17,8 +17,6 @@ int built_cd(char **args)
 		_setenv(&node->env, "OLDPWD", cwd);
 		oldh = _getenv("OLDPWD", node->env);
 	}
-	/* printf("home : %s\n", home->value); */
-	/* printf("old home : %s\n", oldh->value); */
 	if (args[1] == NULL)
 	{
 		if (home != NULL)
@@ -42,12 +40,9 @@ int built_cd(char **args)
 			/* perror("hsh"); */
 			print_error(args[1], 2);
 		}
-	}
-	nwd = getcwd(nwd, 0);
-	/* set environt */
+	} nwd = getcwd(nwd, 0);
 	_setenv(&node->env, "OLDPWD", cwd);
 	_setenv(&node->env, "PWD", nwd);
-	/* set environt */
 	free(nwd);
 	free(cwd);
 	return (1);
@@ -70,9 +65,16 @@ int built_help(__attribute__((unused)) char **args)
  * @args:  arguments.
  * Return: Always returns 0, to terminate execution.
  */
-int built_exit(__attribute__((unused)) char **args)
+int built_exit(char **args)
 {
-	_exit(node->status);
+	if (args[1] == NULL)
+		_exit(node->status);
+	else if (args[1][0] >= '0' && args[1][0] <= '9')
+		_exit(_atoi(args[1]));
+	else
+		print_error(args[1], 3);
+	node->status = 2;
+	return (0);
 }
 /**
  * built_env - print environ
